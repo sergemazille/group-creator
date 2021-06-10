@@ -187,5 +187,18 @@ ul {
   .groups {
     margin-top: 48px;
   }
+
+  @media screen and (max-width: 575px) {
+    flex-direction: column;
+
+    .groups {
+      margin-top: 12px;
+    }
+
+    ul {
+      margin-left: 0;
+      width: auto;
+    }
+  }
 }
 </style>

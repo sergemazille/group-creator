@@ -2,8 +2,10 @@
   <form @submit.prevent="submitForm">
     <label for="participant-input" v-text="'Ajouter un participant :'" />
 
-    <input v-model="participantName" id="participant-input" type="text" placeholder="Bob" />
-    <button :disabled="!isValidForm" v-text="'+'" />
+    <div class="actions">
+      <input v-model="participantName" id="participant-input" type="text" placeholder="Bob" />
+      <button :disabled="!isValidForm" v-text="'+'" />
+    </div>
   </form>
 </template>
 
@@ -34,6 +36,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.actions {
+  display: flex;
+}
+
 label {
   display: block;
   margin-bottom: 4px;
