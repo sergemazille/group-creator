@@ -7,8 +7,11 @@
     </div>
 
     <div class="columns">
-      <div class="participants">
-        <h3><a :href="googleDocumentEditionEndoint" target="_blank">Liste des participants</a> ({{ participants.length }}) :</h3>
+      <div class="participants" ref="participants" data-selector="participants">
+        <h3>
+          <span class="toggle-icon" @click="toggle" data-selector="toggle-icon">▶</span
+          ><a :href="googleDocumentEditionEndoint" target="_blank">Liste des participants</a> ({{ participants.length }})
+        </h3>
         <ul>
           <li v-for="(participant, index) in participants" :key="index">
             <Participant v-bind="{ participant }" @participant-removed="removeParticipant" />
@@ -57,6 +60,12 @@ export default defineComponent({
       this.participants = await (this as any).participantRepository.getParticipants();
     },
 
+    toggle() {
+      const participantsEl = this.$refs.participants as HTMLElement;
+
+      participantsEl.classList.toggle('open');
+    },
+
     addAParticipant(participant: string): void {
       this.participants.unshift(participant);
     },
@@ -89,8 +98,51 @@ export default defineComponent({
   padding: 6px 24px;
 }
 
+.participants {
+  ul {
+    display: none;
+  }
+
+  .toggle-icon {
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 10px;
+    transition: transform 0.15s ease-in-out;
+    display: inline-block;
+  }
+
+  &.open {
+    .toggle-icon {
+      transform: rotate3D(0, 0, 1, 90deg);
+    }
+
+    ul {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: 576px) {
+    ul {
+      display: block;
+    }
+
+    .toggle-icon {
+      display: none;
+    }
+  }
+}
+
 .inputs {
   display: flex;
+
+  @media screen and (max-width: 575px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    > * {
+      margin-bottom: 24px;
+    }
+  }
 
   button {
     cursor: pointer;

@@ -94,4 +94,21 @@ describe('App', () => {
 
     expect(link.attributes('href')).toBe('fakeEndPoint');
   });
+
+  it('should not set participants to "open" as a default state (it has no effect on desktop screen size)', () => {
+    const wrapper = createWrapper();
+
+    const participants = wrapper.find('[data-selector="participants"]');
+
+    expect(participants.classes).not.toContain('open');
+  });
+
+  it('should toggle participants to "open" when toggle-icon is clicked', () => {
+    const wrapper = createWrapper();
+    const participants = wrapper.find('[data-selector="participants"]');
+
+    wrapper.find('[data-selector="toggle-icon"]').trigger('click');
+
+    expect(participants.classes()).toContain('open');
+  });
 });
