@@ -21,9 +21,7 @@
 
       <ul class="groups">
         <li v-for="(group, index) in groups" :key="index">
-          <ul class="group">
-            <li v-for="participant in group" :key="participant" v-text="participant" />
-          </ul>
+          <Group v-bind="{group}" />
         </li>
       </ul>
     </div>
@@ -32,6 +30,7 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
+import Group from './components/Group.vue';
 import GroupCountInput from './components/GroupCountInput.vue';
 import ParticipantInput from './components/ParticipantInput.vue';
 import Participant from './components/Participant.vue';
@@ -45,7 +44,7 @@ export default defineComponent({
     return { googleDocumentEditionEndoint, groupsMaker, participantRepository };
   },
 
-  components: { GroupCountInput, Participant, ParticipantInput },
+  components: { Group, GroupCountInput, Participant, ParticipantInput },
 
   data() {
     return {
