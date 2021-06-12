@@ -1,7 +1,10 @@
 <template>
   <div class="group-wrapper">
-    <span class="toaster" ref="toaster">✔</span>
-    <button @click="copyParticipants">📋</button>
+    <div class="copy">
+      <span class="notification" ref="notification">✔</span>
+      <button @click="copyParticipants">📋</button>
+    </div>
+
     <ul class="group" ref="group">
       <li v-for="participant in group" :key="participant" v-text="participant" />
     </ul>
@@ -37,10 +40,11 @@ export default defineComponent({
         document.execCommand('copy');
         groupContent.style.display = 'none';
 
-        const toaster = this.$refs.toaster as HTMLInputElement;
-        toaster.classList.add('is-visible');
+        const notification = this.$refs.notification as HTMLInputElement;
+        notification.classList.add('is-visible');
+
         setTimeout(() => {
-          toaster.classList.remove('is-visible');
+          notification.classList.remove('is-visible');
         }, 2000);
       } catch {
         groupContent.style.display = 'none';
@@ -53,15 +57,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .group-wrapper {
   position: relative;
-
-  button {
-    position: absolute;
-    right: 6px;
-    top: 6px;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-  }
 
   ul {
     list-style-type: none;
@@ -90,21 +85,32 @@ export default defineComponent({
     }
   }
 
-  .toaster {
-    opacity: 0;
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    border: 3px solid grey;
-    background-color: rgb(71, 192, 71);
-    border-radius: 4px;
-    padding: 12px;
-    font-size: 24px;
-    color: white;
-    transition: opacity 0.3s ease-in-out;
+  .copy {
+    button {
+      position: absolute;
+      right: 6px;
+      top: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
 
-    &.is-visible {
-      opacity: 1;
+    .notification {
+      opacity: 0;
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      border: 3px solid grey;
+      background-color: rgb(71, 192, 71);
+      border-radius: 4px;
+      padding: 12px;
+      font-size: 24px;
+      color: white;
+      transition: opacity 0.3s ease-in-out;
+
+      &.is-visible {
+        opacity: 1;
+      }
     }
   }
 }
