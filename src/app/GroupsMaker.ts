@@ -24,7 +24,7 @@ export class GroupsMaker {
 
     while (participants.length) {
       for (let i = 0; i < groupsCount; i++) {
-        if (typeof groups[i] !== 'object') {
+        if (typeof groups[i] !== 'object' && participants[0]) {
           groups[i] = [];
         }
 
