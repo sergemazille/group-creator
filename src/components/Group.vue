@@ -1,15 +1,14 @@
 <template>
   <div class="group-wrapper">
-    <div class="copy">
+    <div class="clipboard">
       <span class="notification" ref="notification">✔</span>
       <button @click="copyParticipants">📋</button>
+      <textarea :value="participantsList" ref="participantsList" />
     </div>
 
     <ul class="group" ref="group">
       <li v-for="participant in group" :key="participant" v-text="participant" />
     </ul>
-
-    <textarea style="display: none" :value="groupContent" ref="groupContent" />
   </div>
 </template>
 
@@ -25,20 +24,20 @@ export default defineComponent({
   },
 
   computed: {
-    groupContent(): string {
+    participantsList(): string {
       return this.group.join('\t');
     },
   },
 
   methods: {
     copyParticipants() {
-      const groupContent = this.$refs.groupContent as HTMLInputElement;
-      groupContent.style.display = 'initial';
-      groupContent.select();
+      const participantsListEl = this.$refs.participantsList as HTMLInputElement;
+      participantsListEl.style.display = 'initial';
+      participantsListEl.select();
 
       try {
         document.execCommand('copy');
-        groupContent.style.display = 'none';
+        participantsListEl.style.display = 'none';
 
         const notification = this.$refs.notification as HTMLInputElement;
         notification.classList.add('is-visible');
@@ -47,7 +46,7 @@ export default defineComponent({
           notification.classList.remove('is-visible');
         }, 2000);
       } catch {
-        groupContent.style.display = 'none';
+        participantsListEl.style.display = 'none';
       }
     },
   },
@@ -85,7 +84,7 @@ export default defineComponent({
     }
   }
 
-  .copy {
+  .clipboard {
     button {
       position: absolute;
       right: 6px;
@@ -111,6 +110,10 @@ export default defineComponent({
       &.is-visible {
         opacity: 1;
       }
+    }
+
+    textarea {
+      display: none;
     }
   }
 }
