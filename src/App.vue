@@ -12,16 +12,17 @@
           <span class="toggle-icon" @click="toggle" data-selector="toggle-icon">▶</span
           ><a :href="googleDocumentEditionEndoint" target="_blank">Liste des participants</a> ({{ participants.length }})
         </h3>
-        <ul>
-          <li v-for="(participant, index) in participants" :key="index">
+
+        <transition-group tag="ul" name="participants">
+          <li v-for="participant in participants" :key="participant">
             <Participant v-bind="{ participant }" @participant-removed="removeParticipant" />
           </li>
-        </ul>
+        </transition-group>
       </div>
 
       <ul class="groups">
         <li v-for="(group, index) in groups" :key="index">
-          <Group v-bind="{group}" />
+          <Group v-bind="{ group }" />
         </li>
       </ul>
     </div>
@@ -199,5 +200,23 @@ ul {
       width: auto;
     }
   }
+}
+
+/* transitions */
+.participants-enter-active {
+  transition: opacity 0.6s ease-out;
+}
+
+.participants-enter-from {
+  opacity: 0;
+}
+
+.participants-leave-active {
+  transition: all 0.2s ease-out;
+}
+
+.participants-leave-to {
+  opacity: 0;
+  transform: translateX(-100px);
 }
 </style>
