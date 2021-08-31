@@ -5,7 +5,7 @@ import { createApp } from 'vue';
 
 const googleSheetBaseUrl = import.meta.env.VITE_GOOGLE_SHEET_BASE_URL;
 const googleSheetId = import.meta.env.VITE_GOOGLE_SHEET_ID;
-const googleSheetEndpoint = `${googleSheetBaseUrl}/${googleSheetId}/1/public/full?alt=json` as string;
+const googleSheetEndpoint = `${googleSheetBaseUrl}/${googleSheetId}/gviz/tq?tqx=out:json` as string;
 const participantRepository = new ParticipantRepository(googleSheetEndpoint);
 
 const googleDocumentBaseUrl = 'https://docs.google.com/spreadsheets/d';
