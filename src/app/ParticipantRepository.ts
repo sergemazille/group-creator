@@ -5,9 +5,8 @@ export class ParticipantRepository {
 
   async getParticipants(): Promise<string[]> {
     try {
-      const apiResponse = await fetch(this.endpoint);
-      const textResponse = await apiResponse.text();
-      const jsonResponse = JSON.parse(textResponse.substr(47).slice(0, -2));
+      const { data: apiResponse } = await axios.get(this.endpoint);
+      const jsonResponse = JSON.parse(apiResponse.substr(47).slice(0, -2));
       const entries: any = jsonResponse.table.rows;
 
       const participants = entries.map((entry: any) => {

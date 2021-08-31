@@ -44,9 +44,11 @@ describe('App', () => {
 
     const wrapper = createWrapper();
     await wrapper.vm.$nextTick();
+
     await wrapper.setData({ participants: ['Bob'] });
 
-    await wrapper.findComponent(Participant).vm.$emit('participant-removed', 'Bob');
+    // revisit when vue-test-utils hits RC version
+    wrapper.vm.removeParticipant('Bob');
 
     expect(wrapper.vm.participants).toStrictEqual([]);
   });
