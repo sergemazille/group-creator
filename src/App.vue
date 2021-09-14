@@ -152,14 +152,20 @@ export default defineComponent({
   button {
     cursor: pointer;
     color: white;
-    border: none;
+    border: 2px solid rgb(26, 3, 44);
     border-radius: 4px;
-    padding: 12px;
+    padding: 16px 24px;
     font-weight: bold;
-    background-color: rgb(116, 168, 99);
+    background-color: rgb(102, 165, 81);
+    font-size: 1.1rem;
+    transform: translate3d(0, 48px, 0);
 
     &:hover {
-      background-color: rgb(58, 148, 31);
+      background-color: rgb(70, 177, 37);
+    }
+
+    @media screen and (max-width: 575px) {
+      transform: translate3d(0, 0, 0);
     }
   }
 
