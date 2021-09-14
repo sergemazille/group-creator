@@ -9,8 +9,12 @@
     <div class="columns">
       <div class="participants" ref="participants" data-selector="participants">
         <h3>
-          <span class="toggle-icon" @click="toggle" data-selector="toggle-icon">▶</span
-          ><a :href="googleDocumentEditionEndoint" target="_blank">Liste des participants</a> ({{ participants.length }})
+          <span class="toggle-icon" @click="toggle" data-selector="toggle-icon">▶</span>
+          <a :href="googleDocumentEditionEndoint" target="_blank" class="googlesheet-link">
+            <span>Liste des participants</span>
+            <EditIcon />
+          </a>
+          <span> ({{ participants.length }})</span>
         </h3>
 
         <transition-group tag="ul" name="participants">
@@ -35,6 +39,7 @@ import Group from './components/Group.vue';
 import GroupCountInput from './components/GroupCountInput.vue';
 import ParticipantInput from './components/ParticipantInput.vue';
 import Participant from './components/Participant.vue';
+import EditIcon from './assets/edit.svg.vue';
 
 export default defineComponent({
   setup() {
@@ -45,7 +50,7 @@ export default defineComponent({
     return { googleDocumentEditionEndoint, groupsMaker, participantRepository };
   },
 
-  components: { Group, GroupCountInput, Participant, ParticipantInput },
+  components: { EditIcon, Group, GroupCountInput, Participant, ParticipantInput },
 
   data() {
     return {
@@ -199,6 +204,14 @@ ul {
       margin-left: 0;
       width: auto;
     }
+  }
+}
+
+.googlesheet-link {
+  display: inline-flex;
+
+  &:hover {
+    text-decoration: none;
   }
 }
 
