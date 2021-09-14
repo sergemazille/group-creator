@@ -158,7 +158,7 @@ export default defineComponent({
     font-weight: bold;
     background-color: rgb(102, 165, 81);
     font-size: 1.1rem;
-    transform: translate3d(0, 48px, 0);
+    transform: translate3d(0, 36px, 0);
 
     &:hover {
       background-color: rgb(70, 177, 37);
